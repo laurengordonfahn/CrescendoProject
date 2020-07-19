@@ -12,6 +12,6 @@ class SetHeaders:
         if self.APIKEY.success:
             headers = {'content-type' : "application/json", 'Authorization':'Bearer ' + self.APIKEY.response}
             return Response(True, headers, "Successfully set headers")
-        return Response(False, None, "Failed to set retrieve API Key to set headers")
+        return Response(False, None, self.APIKEY.message)
 
     

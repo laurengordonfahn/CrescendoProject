@@ -1,4 +1,6 @@
 from json import JSONEncoder
+from Resources.response import Response
+
 class Encoder(JSONEncoder):
     def default(self, o):
         return o.__dict__
@@ -8,16 +10,18 @@ class ReviewProcessor:
         self.reviews = reviews
 
     def processReviews(self):
-        displayReviews = []
-        for review in self.reviews:
-            info = Review(review['user']['name'], review['user']['image_url'], review['rating'], review['text'])
-            #I don't see location as an option in this endpoint I am wondering if it only exists if the resturant has more than one location like a Culvers
-            if 'location' in review:
-                info.location = review['location']
-                
-            print("info", Encoder().encode(info))
-            displayReviews.append(Encoder().encode(info))
-        return displayReviews
+        try:
+            displayReviews = []
+            for review in self.reviews:
+                info = Review(review['user']['name'], review['user']['image_url'], review['rating'], review['text'])
+                #I don't see location as an option in this endpoint I am wondering if it only exists if the resturant has more than one location like a Culvers
+                if 'location' in review:
+                    info.location = review['location']
+        
+                displayReviews.append(Encoder().encode(info))
+            return Response(True, displayReviews, "Successfully Created Formatted Reviews"
+        except Exception as e:
+            return Response(False, e, "Failed to format reviews due to exception [" + e + "]")
 
 class Review:
     def __init__(self, reviewerName, avatarURL, rating, reviewContent):
