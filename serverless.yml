@@ -61,6 +61,7 @@ environment:
   YELP_CLIENT: 'YelpClient'
   YELP_API_KEY: 'YelpAPIKey'
   YELP_BASE_URL: 'https://api.yelp.com/v3/'
+  HUNGRY_SUMO_ID: '7mPYkBjL5xzk7R9LlzNQlg'
 
 # you can add packaging information here
 #package:
