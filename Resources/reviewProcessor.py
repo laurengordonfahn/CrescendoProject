@@ -19,7 +19,7 @@ class ReviewProcessor:
                     info.location = review['location']
         
                 displayReviews.append(Encoder().encode(info))
-            return Response(True, displayReviews, "Successfully Created Formatted Reviews"
+            return Response(True, displayReviews, "Successfully Created Formatted Reviews")
         except Exception as e:
             return Response(False, e, "Failed to format reviews due to exception [" + e + "]")
 
