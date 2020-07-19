@@ -23,30 +23,44 @@ service: crescendoproject
 provider:
   name: aws
   runtime: python3.8
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  profile: CrescendoProject
+  region: us-east-2
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
+iamRoleStatements:
+  - Effect: 'Allow'
+    Action: 
+      - 'ssm:GetParameters'
+      - 'ssm:GetParameter'
+      - 'ssm:PutParameter'
+      - 'ssm:DeleteParameters'
+    Resource: 'arn:aws:ssm:us-east-2:503246687161:parameter/YelpClient'
+  - Effect: 'Allow'
+    Action: 
+      - 'ssm:GetParameters'
+      - 'ssm:GetParameter'
+      - 'ssm:PutParameter'
+      - 'ssm:DeleteParameters'
+    Resource: 'arn:aws:ssm:us-east-2:503246687161:parameter/YelpAPIKey'
+  - Effect: 'Allow'
+    Action: 
+      - 'ssm:GetParameters'
+      - 'ssm:GetParameter'
+      - 'ssm:PutParameter'
+      - 'ssm:DeleteParameters'
+    Resource: 'arn:aws:ssm:us-east-2:503246687161:parameter/YelpToken'
+  - Effect: 'Allow'
+    Action:
+      - 'kms:Encrypt'
+      - 'kms:Decrypt'
+    Resource: 'arn:aws:kms:us-east-2:503246687161:key/8aea179c-b379-4072-bef5-02988cd9f7f4'
 
 # you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+environment:
+  YELP_CLIENT: 'YelpClient'
+  YELP_API_KEY: 'YelpAPIKey'
+  YELP_TOKEN: 'YelpToken'
 
 # you can add packaging information here
 #package:
