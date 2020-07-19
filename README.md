@@ -7,10 +7,14 @@ The id for this resturant was gotten using the business phone number YELP endpoi
 https://api.yelp.com/v3/businesses/search/phone?phone=+14145959656
 
 # How to Access Endpoint
- - setup a postman account
+ - setup a postman account (https://identity.getpostman.com/login?_ga=2.229757084.1237843515.1595200888-1188389854.1595200888)
  - in a new postman tab set to GET in the url input field add 
  https://hxt2eg2bo5.execute-api.us-east-2.amazonaws.com/prod/getHungrySumoReviews
  - press send 
+
+OR
+
+Into any browser url input field copy :  https://hxt2eg2bo5.execute-api.us-east-2.amazonaws.com/prod/getHungrySumoReviews
 
 # Points of Reflection
 - This project can become more dynamic by taking in a phone number of a resturant to a new endpoint that calls the YELP get business by phone number endpoint and then grabing the id  of the resturant in order to call for reviews 
